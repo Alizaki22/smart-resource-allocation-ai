@@ -1,28 +1,24 @@
-# 🤖 AI/ML Module – Smart Resource Allocation
+# 🤖 AI/ML Module – Integration Guide
 
 ## 📌 Overview
 
-This module provides a **machine learning API** that predicts task priority based on user input.
+This module provides a **machine learning API** that predicts task priority based on input data.
 
-It is used by the **backend** to make decisions.
+It is used by the backend to process requests from the frontend.
 
 ---
 
-# 🚀 API Endpoint
+# 🚀 API DETAILS
+
+## 🔗 Endpoint
 
 ```
-POST /predict
-```
-
-Base URL (local):
-
-```
-http://127.0.0.1:5000/predict
+POST http://127.0.0.1:5001/predict
 ```
 
 ---
 
-# 📥 Input Format
+# 📥 INPUT FORMAT
 
 Send JSON:
 
@@ -35,7 +31,7 @@ Send JSON:
 
 ---
 
-# 📤 Output Format
+# 📤 OUTPUT FORMAT
 
 ```json
 {
@@ -45,85 +41,135 @@ Send JSON:
 
 ---
 
-# 🧠 Input Meaning
+# 🧠 FIELD MEANINGS
+
+## Skill Mapping
 
 ```
-skill:
 1 = Teaching
 2 = Medical
 3 = Logistics
+```
 
-urgency:
+## Urgency Scale
+
+```
 1 = Low
 5 = High
 ```
 
----
+## Prediction Meaning
 
-# ⚙️ How to Run
-
-## 1. Install Dependencies
-
-```bash
-pip install pandas numpy scikit-learn flask
+```
+0 = Low priority task
+1 = High priority urgent task
 ```
 
 ---
 
-## 2. Run the Model API
+# ⚙️ HOW TO RUN (FOR TEAM)
 
 ```bash
 python ai-model/model.py
 ```
 
----
-
-## 3. Server Starts At
+Runs on:
 
 ```
-http://127.0.0.1:5000/
+http://127.0.0.1:5001
 ```
 
 ---
 
-# 🧪 Test Example
+# 🧪 TEST EXAMPLE
 
 ```bash
-curl -X POST http://127.0.0.1:5000/predict ^
+curl -X POST http://127.0.0.1:5001/predict ^
 -H "Content-Type: application/json" ^
 -d "{\"skill\":2, \"urgency\":4}"
 ```
 
 ---
 
-# ⚠️ Important Notes (For Backend Dev)
+# ⚠️ IMPORTANT RULES (VERY IMPORTANT)
 
-* API must be running before calling it
+* API must be running before backend starts
 * Input must be JSON
-* Keys must be exactly:
+* Field names must match exactly:
 
-  * `"skill"`
-  * `"urgency"`
+  * `skill`
+  * `urgency`
 
 ---
 
-# 🧩 Files in This Folder
+# ⚙️ FOR BACKEND DEVELOPER
+
+### What to do:
+
+* Send POST request to `/predict`
+* Pass JSON input
+* Receive prediction
+
+### Example flow:
+
+```
+Frontend → Backend → AI API → Backend → Frontend
+```
+
+---
+
+# 🎨 FOR FRONTEND DEVELOPER
+
+### Input fields required:
+
+* skill (number)
+* urgency (number)
+
+### Example:
+
+```json
+{
+  "skill": 2,
+  "urgency": 4
+}
+```
+
+---
+
+# 🗄️ FOR DATABASE DEVELOPER
+
+### Store the following:
+
+```json
+{
+  "skill": number,
+  "urgency": number,
+  "prediction": number
+}
+```
+
+---
+
+# 📂 FILE STRUCTURE
 
 ```
 ai-model/
-├── model.py        # API server
-├── model.pkl       # Trained model
-├── train.py        # Model training
-├── test.json       # Sample input
+├── model.py
+├── model.pkl
+├── train.py
+├── test.json
 ├── requirements.txt
+├── readme.txt
 ```
 
 ---
 
-# 🎯 Goal
+# 🎯 FINAL NOTE
 
-Provide a **working prediction API** for integration with backend.
+* This API is **ready for integration**
+* No changes required in AI logic
+* Focus now on connecting backend and frontend
 
 ---
 
-🔥 This API is ready to use.
+🔥 AI module is complete and ready to use.

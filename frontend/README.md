@@ -198,5 +198,5 @@ Also consider integrating:
 
 ---
 
-🔥 Frontend is production-ready for hackathon/demo use
+🔥 Frontend is production-ready for hackathon/demo use account
 ;/

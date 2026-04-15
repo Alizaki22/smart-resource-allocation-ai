@@ -31,11 +31,16 @@ function Home() {
       console.log("API RESPONSE:", res);
 
       // ✅ SAFE DATA EXTRACTION (FIXED)
-      const predictionValue =
-        res?.prediction?.prediction || "Unknown";
+     const raw = res?.prediction?.prediction;
 
-      setResult(predictionValue);
+// ✅ Convert number → text
+let predictionValue = "Unknown";
 
+if (raw === 1 || raw === "High") predictionValue = "High";
+else if (raw === 0 || raw === "Low") predictionValue = "Low";
+else if (raw === 2 || raw === "Medium") predictionValue = "Medium";
+
+setResult(predictionValue);
     } catch (error) {
       console.error(error);
       setResult("Error connecting backend");

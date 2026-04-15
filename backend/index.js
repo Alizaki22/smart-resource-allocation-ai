@@ -1,50 +1,27 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const axios = require("axios");
+require("dotenv").config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/ai_project")
-.then(() => console.log("MongoDB connected"))
+// Routes
+app.use("/api", require("./routes/predict"));
+
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
-const DataSchema = new mongoose.Schema({
-    input: Object,
-    prediction: String
+// Test route
+app.get("/", (req, res) => {
+  res.send("Backend is running");
 });
 
-const Data = mongoose.model("Data", DataSchema);
-
-app.post("/predict", async (req, res) => {
-    try {
-        const userData = req.body;
-
-        const response = await axios.post(
-            "http://127.0.0.1:5000/predict",
-            userData
-        );
-
-        const prediction = response.data.prediction;
-
-        const newData = new Data({
-            input: userData,
-            prediction: prediction
-        });
-
-        await newData.save();
-
-        res.json({ prediction });
-
-    } catch (error) {
-        console.log(error);
-        res.status(500).send("Error");
-    }
-});
-
-app.listen(5001, () => {
-    console.log("Server running on port 5001");
+// Start server
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
 });

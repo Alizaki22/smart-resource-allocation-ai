@@ -1,27 +1,29 @@
 # 🎨 Frontend – Smart Resource Allocation AI
 
+---
+
 ## 📌 Overview
 
 This is the **frontend application** for the Smart Resource Allocation AI system.
 
-It allows users to:
+It enables users to:
 
-- Select task **skill type**
-- Set **urgency level**
-- Get AI-based **task priority prediction**
-
----
-
-# 🚀 TECH STACK
-
-- React (Vite)
-- JavaScript (JSX)
-- Axios (API requests)
-- CSS (inline styles)
+* Select a **task skill type**
+* Set an **urgency level**
+* Receive an AI-powered **task priority prediction**
 
 ---
 
-# 📂 FOLDER STRUCTURE
+## 🚀 Tech Stack
+
+* ⚛️ React (Vite)
+* 🟨 JavaScript (JSX)
+* 🌐 Axios (API requests)
+* 🎨 CSS (basic styling)
+
+---
+
+## 📂 Folder Structure
 
 ```
 frontend/
@@ -29,7 +31,7 @@ frontend/
 │   ├── pages/
 │   │   └── Home.jsx        # Main UI component
 │   ├── services/
-│   │   └── api.js          # API connection to backend
+│   │   └── api.js          # API connection
 │   ├── App.jsx             # Root component
 │   ├── main.jsx            # Entry point
 │   └── index.css           # Global styles
@@ -40,27 +42,29 @@ frontend/
 
 ---
 
-# 🎯 FEATURES
+## 🎯 Features
 
-✅ User-friendly UI
-✅ Skill selection (Teaching, Medical, Logistics)
-✅ Urgency slider (1–5)
-✅ AI prediction result display
-✅ Loading state feedback
-
----
-
-# 🔗 API INTEGRATION
-
-## Endpoint (via backend)
-
-```
-POST http://127.0.0.1:5000/predict
-```
+* ✅ Clean and user-friendly interface
+* ✅ Skill selection (Teaching, Medical, Logistics)
+* ✅ Urgency level input (1–5)
+* ✅ AI prediction result display
+* ✅ Loading and error handling
 
 ---
 
-## 📥 Request Format
+## 🔗 API Integration
+
+### Endpoint (via backend)
+
+```
+POST /predict
+```
+
+> Base URL is handled via environment configuration
+
+---
+
+### 📥 Request Format
 
 ```json
 {
@@ -71,7 +75,7 @@ POST http://127.0.0.1:5000/predict
 
 ---
 
-## 📤 Response Format
+### 📤 Response Format
 
 ```json
 {
@@ -81,25 +85,25 @@ POST http://127.0.0.1:5000/predict
 
 ---
 
-# 🧠 DATA FLOW
+## 🧠 Data Flow
 
 ```
 User Input (Frontend)
         ↓
-Frontend (React)
+React UI
         ↓
-Backend API (Flask/Node)
+Backend API (Node.js / Flask)
         ↓
 AI Model (Python)
         ↓
 Prediction Response
         ↓
-Frontend UI Display
+Frontend Display
 ```
 
 ---
 
-# ⚙️ HOW TO RUN FRONTEND
+## ⚙️ Running the Frontend
 
 ```bash
 cd frontend
@@ -107,7 +111,7 @@ npm install
 npm run dev
 ```
 
-Runs on:
+App runs on:
 
 ```
 http://localhost:5173
@@ -115,35 +119,36 @@ http://localhost:5173
 
 ---
 
-# ⚠️ IMPORTANT FOR TEAM
+## ⚠️ Team Integration Guidelines
 
-### Backend Developer:
+### 🧩 Backend Developer
 
-- Must expose endpoint: `/predict`
-- Must accept:
-  - `skill`
-  - `urgency`
+* Provide endpoint: `/predict`
+* Accept:
 
-- Must return:
-  - `prediction`
+  * `skill`
+  * `urgency`
+* Return:
+
+  * `prediction`
 
 ---
 
-### AI/ML Developer:
+### 🤖 AI/ML Developer
 
-- Model must run on:
+* Model should run on:
 
 ```
 http://127.0.0.1:5001
 ```
 
-- Backend will call AI model
+* Backend will communicate with the AI service
 
 ---
 
-### Database Developer:
+### 🗄️ Database Developer
 
-- Store:
+Store records in this format:
 
 ```json
 {
@@ -155,48 +160,44 @@ http://127.0.0.1:5001
 
 ---
 
-# 🎨 UI LOGIC
+## 🎨 UI Logic
 
 | Field      | Description          |
 | ---------- | -------------------- |
-| Skill      | Type of task (1–3)   |
+| Skill      | Task type (1–3)      |
 | Urgency    | Priority level (1–5) |
-| Prediction | AI result (0 or 1)   |
+| Prediction | AI output (0 or 1)   |
 
 ---
 
-# 🎤 DEMO EXPLANATION
+## 🎤 Demo Explanation
 
-> This frontend allows users to input task requirements and uses an AI model to predict whether the task is high or low priority.
-
----
-
-# 🏁 FINAL NOTES
-
-- Frontend is fully ready for integration
-- No changes needed in UI logic
-- Ensure backend & AI services are running
+> This frontend allows users to input task parameters and leverages an AI model to determine whether the task should be prioritized as high or low.
 
 ---
 
-# 🧠 PRODUCTION NOTE (OPTIONAL UPGRADE)
+## 🏁 Final Notes
 
-For production-level applications, it is recommended to migrate to **TypeScript** with type-aware linting.
+* Frontend is **fully ready for integration**
+* No changes required in UI logic
+* Ensure backend and AI services are running before testing
 
-You can use the official Vite React TypeScript template:
+---
+
+## 🧠 Production Note (Optional Upgrade)
+
+For production-grade applications, consider migrating to **TypeScript**.
+
 👉 https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts
-
-Benefits:
-
-- Type safety
-- Better code quality
-- Fewer runtime errors
-- Improved team collaboration
-
-Also consider integrating:
 👉 https://typescript-eslint.io
 
+### Benefits:
+
+* Type safety
+* Improved code quality
+* Better maintainability
+* Reduced runtime errors
+
 ---
 
-🔥 Frontend is production-ready for hackathon/demo use account for ues
-;/
+🔥 This frontend is **hackathon-ready, scalable, and production-friendly**.

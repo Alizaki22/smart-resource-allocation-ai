@@ -9,6 +9,7 @@ function Home() {
 
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [resultText, setResultText] = useState("");
 
   const handleChange = (e) => {
     setForm({
@@ -18,21 +19,28 @@ function Home() {
   };
 
   const handleSubmit = async () => {
-    if (!form.skill || !form.urgency) {
-      alert("Please fill all fields");
-      return;
-    }
+  if (!form.skill || !form.urgency) {
+    alert("Please fill all fields");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      const res = await predict(form);
-      setResult(res.data.prediction);
-    } catch (error) {
-      console.error(error);
-      alert("Error connecting to server");
-    }
+  setLoading(true);
+
+  try {
+    const res = await predict(form.skill, form.urgency);
+
+    console.log(res);
+
+    setResult(res.prediction.prediction);
+    setResultText(res.prediction.task);
+
+  } catch (error) {
+    console.error(error);
+    alert("Error connecting backend");
+  } finally {
     setLoading(false);
-  };
+  }
+};
 
   return (
     <div style={container}>
@@ -78,16 +86,19 @@ function Home() {
         </p>
 
         {/* Button */}
-        <button style={button} onClick={handleSubmit}>
-          {loading ? "Analyzing..." : "Predict Priority"}
-        </button>
+<button style={button} onClick={handleSubmit}>
+  {loading ? "Analyzing..." : "Predict Priority"}
+</button>
 
-        {/* Result */}
-        {result !== null && (
-          <div style={resultBox}>
-            {result === 1 ? "🚨 High Priority Task" : "✅ Low Priority Task"}
-          </div>
-        )}
+{/* ✅ ADD HERE */}
+{loading && <p style={{ marginTop: "10px" }}>⏳ Analyzing AI...</p>}
+
+{/* Result */}
+{result !== null && (
+  <div style={resultBox}>
+    {resultText}
+  </div>
+)}
       </div>
     </div>
   );

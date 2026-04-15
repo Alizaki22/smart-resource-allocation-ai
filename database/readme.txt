@@ -139,6 +139,8 @@ Your teammates can now:
 ⭐ What You Should Do Now
 Create a file:
 
+waiting for the logins detail from Anonya
+
 database/TEAM_DATABASE_INFO.md
 Paste everything above.
 

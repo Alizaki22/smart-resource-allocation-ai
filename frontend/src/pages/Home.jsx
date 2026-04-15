@@ -9,7 +9,6 @@ function Home() {
 
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [resultText, setResultText] = useState("");
 
   const handleChange = (e) => {
     setForm({
@@ -19,28 +18,31 @@ function Home() {
   };
 
   const handleSubmit = async () => {
-  if (!form.skill || !form.urgency) {
-    alert("Please fill all fields");
-    return;
-  }
+    if (!form.skill || !form.urgency) {
+      alert("Please fill all fields");
+      return;
+    }
 
-  setLoading(true);
+    setLoading(true);
 
-  try {
-    const res = await predict(form.skill, form.urgency);
+    try {
+      const res = await predict(form.skill, form.urgency);
 
-    console.log(res);
+      console.log("API RESPONSE:", res);
 
-    setResult(res.prediction.prediction);
-    setResultText(res.prediction.task);
+      // ✅ SAFE DATA EXTRACTION (FIXED)
+      const predictionValue =
+        res?.prediction?.prediction || "Unknown";
 
-  } catch (error) {
-    console.error(error);
-    alert("Error connecting backend");
-  } finally {
-    setLoading(false);
-  }
-};
+      setResult(predictionValue);
+
+    } catch (error) {
+      console.error(error);
+      setResult("Error connecting backend");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div style={container}>
@@ -56,6 +58,7 @@ function Home() {
         <p style={subtitle}>
           Analyze task importance using AI based on skill and urgency
         </p>
+
         {/* Skill */}
         <label style={label}>Select Skill</label>
         <select
@@ -86,19 +89,19 @@ function Home() {
         </p>
 
         {/* Button */}
-<button style={button} onClick={handleSubmit}>
-  {loading ? "Analyzing..." : "Predict Priority"}
-</button>
+        <button style={button} onClick={handleSubmit}>
+          {loading ? "Analyzing..." : "Predict Priority"}
+        </button>
 
-{/* ✅ ADD HERE */}
-{loading && <p style={{ marginTop: "10px" }}>⏳ Analyzing AI...</p>}
+        {/* Loading */}
+        {loading && <p style={{ marginTop: "10px" }}>⏳ Analyzing AI...</p>}
 
-{/* Result */}
-{result !== null && (
-  <div style={resultBox}>
-    {resultText}
-  </div>
-)}
+        {/* ✅ FINAL RESULT DISPLAY */}
+        {result && (
+          <div style={resultBox}>
+            ✅ Priority: {result}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -142,6 +145,7 @@ const subtitle = {
   marginBottom: "25px",
   lineHeight: "1.5",
 };
+
 const label = {
   display: "block",
   textAlign: "left",

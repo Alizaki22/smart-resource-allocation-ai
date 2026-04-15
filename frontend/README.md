@@ -198,5 +198,5 @@ Also consider integrating:
 
 ---
 
-🔥 Frontend is production-ready for hackathon/demo use account
+🔥 Frontend is production-ready for hackathon/demo use account for ues
 ;/

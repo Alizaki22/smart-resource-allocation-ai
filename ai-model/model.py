@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# ✅ Load model safely
+# ✅ Load model safelyc
 model_path = os.path.join(os.path.dirname(__file__), "model.pkl")
 with open(model_path, "rb") as model_file:
     model = pickle.load(model_file)

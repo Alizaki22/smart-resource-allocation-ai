@@ -5,7 +5,7 @@ const Allocation = require("../../database/models/Allocation");
 const predictController = require("../controllers/predictController");
 
 // POST route
-router.post("/predict", predictController);
+router.post("/predict", predictController.predictTask);
 
 // GET history
 router.get("/history", async (req, res) => {

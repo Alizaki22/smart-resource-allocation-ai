@@ -12,11 +12,11 @@ app.use(express.json());
 app.use("/api", require("./routes/predict"));
 
 // MongoDB connection
-const mongoose = require("mongoose");
+//const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/smart-resource-allocation-ai")
-  .then(() => console.log("✅ MongoDB Connected (Team DB)"))
-  .catch(err => console.log("❌ DB Error:", err));
+//mongoose.connect("mongodb://127.0.0.1:27017/smart-resource-allocation-ai")
+  //.then(() => console.log("✅ MongoDB Connected (Team DB)"))
+  //.catch(err => console.log("❌ DB Error:", err));
 
 // Test route
 app.get("/", (req, res) => {

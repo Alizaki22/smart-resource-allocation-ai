@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pickle
 import os
 
 app = Flask(__name__)
+CORS(app)
 
-# ✅ Load model safelyc
+# ✅ Load model safely
 model_path = os.path.join(os.path.dirname(__file__), "model.pkl")
 with open(model_path, "rb") as model_file:
     model = pickle.load(model_file)
@@ -34,7 +36,7 @@ def predict():
         prediction = model.predict([[skill, urgency]])
         pred_value = int(prediction[0])
 
-        # ✅ Meaningful output (for judges 🔥)
+        # ✅ Meaningful output
         task_map = {
             0: "Low priority task",
             1: "High priority urgent task"
@@ -50,4 +52,5 @@ def predict():
 
 
 if __name__ == "__main__":
-     app.run(port=5001)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
